@@ -1,6 +1,6 @@
 # Makefile
 A simple makefile for C and C++ projects that should work on both Linux and Windows with Mingw.
-It uses seperate directories for sources and headers and recursively looks for every file inside those.
+It uses seperate directories for sources and headers and recursively looks for every file inside, so that you don't have to specify rules for every file yourself in the makefile.
 
 ### How to configure it
 

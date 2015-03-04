@@ -13,11 +13,12 @@ TARGET:=prog.exe
 # The target executable file.
 
 COMMONFLAGS:=-Wall -Wextra -O2
-CFLAGS=$(COMMONFLAGS)
-CXXFLAGS=$(COMMONFLAGS) -std=c++1y
+CFLAGS=$(COMMONFLAGS) -std=c11
+CXXFLAGS=$(COMMONFLAGS) -std=c++11
 # Flags added to the compilation.
-LIBS_WIN32:=-lmingw32 -lSDL2main -lSDL2
-LIBS_LINUX:=-lSDL2
+COMMONLIBS:=-lSDL2
+WIN32LIBS:=$(COMMONLIBS) -lmingw32 -lSDL2main
+LINUXLIBS:=$(COMMONLIBS)
 # Libraries needed to link the TARGET executable, for windows and for linux.
 
 #===== Functions =====#
@@ -53,14 +54,14 @@ COMMONFLAGS+=$(I_SRC) $(I_INC) -MMD
 # It compiles source files with the -MMD option that creates dependency files.
 
 ifeq ($(OS),Windows_NT)
-	LIBS:=$(LIBS_WIN32)
+	LIBS:=$(WIN32LIBS)
 	AND:=&
 	CLEAR:=cls
 	MOVE:=cmd /c move
 	CLEAN:=cmd /c del /q
 	OBJ_DEP:=$(DIR_OBJ:%/=%)
 else
-	LIBS:=$(LIBS_LINUX)
+	LIBS:=$(LINUXLIBS)
 	AND:=;
 	CLEAR:=clear
 	MOVE:=mv

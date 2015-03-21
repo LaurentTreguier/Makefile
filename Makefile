@@ -7,7 +7,7 @@ DIR_OBJ:=obj/
 # The object files directory also serves for dependency files.
 # All directories must end with a slash ("/") or else the makefile won't work !
 
-COMPILER:=g++
+CC:=g++
 EXT:=cpp
 TARGET:=prog.exe
 # The target executable file.
@@ -83,7 +83,7 @@ endif
 $(TARGET):$(OBJ)
 	-@$(MOVE) *.o $(DIR_OBJ)
 	-@$(MOVE) *.d $(DIR_OBJ)
-	$(COMPILER) $(addprefix $(DIR_OBJ),$(OBJ)) $(LIBS) -o $(TARGET)
+	$(CC) $(addprefix $(DIR_OBJ),$(OBJ)) $(LIBS) -o $(TARGET)
 # The main rule of the makefile : the compilation of TARGET.
 # The new object and dependency files are moved in the object directory.
 

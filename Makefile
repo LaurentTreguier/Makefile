@@ -7,8 +7,8 @@ DIR_OBJ:=obj/
 # The object files directory also serves for dependency files.
 # All directories must end with a slash ("/") or else the makefile won't work !
 
-COMPILER:=$(CC)
-EXT:=c
+COMPILER:=g++
+EXT:=cpp
 TARGET:=prog.exe
 # The target executable file.
 
@@ -16,8 +16,8 @@ COMMONFLAGS:=-Wall -Wextra -O2
 CFLAGS=$(COMMONFLAGS) -std=c11
 CXXFLAGS=$(COMMONFLAGS) -std=c++11
 # Flags added to the compilation.
-COMMONLIBS:=-lSDL2
-WIN32LIBS:=$(COMMONLIBS) -lmingw32 -lSDL2main
+COMMONLIBS:=
+WIN32LIBS:=$(COMMONLIBS)
 LINUXLIBS:=$(COMMONLIBS)
 # Libraries needed to link the TARGET executable, for windows and for linux.
 
@@ -80,25 +80,16 @@ endif
 
 .PHONY:all init clear %-depend clean
 
-all:clear $(TARGET)
-	@echo Finished !
-# The Make default goal. It forces Make to run clear and TARGET rules.
-
-init:
-	-@mkdir $(DIR_SRC) $(DIR_INC) $(DIR_OBJ)
-	@echo Project created in the current directory
-
-clear:
-	@$(CLEAR)
-	@echo Compiling $(TARGET)...
-# Clears the console.
-
 $(TARGET):$(OBJ)
 	-@$(MOVE) *.o $(DIR_OBJ)
 	-@$(MOVE) *.d $(DIR_OBJ)
 	$(COMPILER) $(addprefix $(DIR_OBJ),$(OBJ)) $(LIBS) -o $(TARGET)
 # The main rule of the makefile : the compilation of TARGET.
 # The new object and dependency files are moved in the object directory.
+
+init:
+	-@mkdir $(DIR_SRC) $(DIR_INC) $(DIR_OBJ)
+	@echo Project created in the current directory
 
 %-depend:
 	-@cd obj $(AND) $(CLEAN) $(*F).o $(AND) $(CLEAN) $(*F).d

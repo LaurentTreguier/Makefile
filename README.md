@@ -10,7 +10,7 @@ There are a few variables that can be changed in the first section of the makefi
 - `EXT` is the extension used by source files
 - `TARGET` is the name of the target executable
 - `COMMONFLAGS`, `CFLAGS` and `CXXFLAGS` contain C and C++ compiler flags
-- `LIBS_WIN32` and `LIBS_LINUX` contain library linker flags for Windows and Linux
+- `COMMONLIBS`, `WIN32LIBS` and `LINUXLIBS` contain library linker flags for Windows and Linux
 
 ### How to use it
 
